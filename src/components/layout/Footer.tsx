@@ -22,13 +22,13 @@ export default function Footer() {
           </Link>
           <p className="mt-3 text-sm text-ink-soft max-w-sm leading-relaxed">{siteSettings.tagline}</p>
           <div className="mt-5 flex items-center gap-4">
-            {Object.entries(siteSettings.social).map(([key, url]) => {
+            {Object.entries(siteSettings.social).map(([key, url]: [string, string | undefined]) => {
               const Icon = socialIcons[key as keyof typeof socialIcons]
               if (!Icon || !url) return null
               return (
                 <a
                   key={key}
-                  href={url}
+                  href={String(url)}
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={key}
@@ -67,7 +67,7 @@ export default function Footer() {
 
       <div className="border-t border-mist-line">
         <div className="container-editorial py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-ink-soft">
-          <p>&copy; {year} {siteSettings.site_name}. All rights reserved.</p>
+          <p>&copy; {year} {String(siteSettings.site_name)}. All rights reserved.</p>
           <p>Built with React, TypeScript &amp; Supabase.</p>
         </div>
       </div>
