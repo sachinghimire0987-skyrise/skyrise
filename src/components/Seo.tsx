@@ -30,13 +30,13 @@ export default function Seo({ title, description, image, type = 'website', canon
     const fullTitle = title === siteSettings.site_name ? title : `${title} \u2014 ${siteSettings.site_name}`
     document.title = fullTitle
 
-    const desc = description || siteSettings.description
+    const desc = description ?? siteSettings.description ?? ''
     setMeta('description', desc)
 
     setMeta('og:title', fullTitle, 'property')
     setMeta('og:description', desc, 'property')
     setMeta('og:type', type, 'property')
-    setMeta('og:site_name', siteSettings.site_name, 'property')
+    setMeta('og:site_name', String(siteSettings.site_name), 'property')
     if (image) setMeta('og:image', image, 'property')
 
     setMeta('twitter:card', image ? 'summary_large_image' : 'summary')
