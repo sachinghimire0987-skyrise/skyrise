@@ -16,7 +16,7 @@ export default function ArticleDetail() {
   useEffect(() => {
     if (!slug) return
     setArticle(undefined)
-    Promise.all([getArticleBySlug(slug), getPublishedArticles()]).then(([a, list]) => {
+    Promise.all([getArticleBySlug(slug), getPublishedArticles()]).then(([a, list]: [Article | null, Article[]]) => {
       setArticle(a)
       setAll(list)
     })
@@ -25,8 +25,8 @@ export default function ArticleDetail() {
   if (article === undefined) return <Loading label="Loading article" />
   if (article === null || article.status !== 'published') return <Navigate to="/articles" replace />
 
-  const related = all.filter((a) => a.id !== article.id && a.category.id === article.category.id).slice(0, 3)
-  const currentIndex = all.findIndex((a) => a.id === article.id)
+  const related = all.filter((a: any) => a.id !== article.id && a.category.id === article.category.id).slice(0, 3)
+  const currentIndex = all.findIndex((a: any) => a.id === article.id)
   const prev = currentIndex > 0 ? all[currentIndex - 1] : null
   const next = currentIndex >= 0 && currentIndex < all.length - 1 ? all[currentIndex + 1] : null
 
@@ -89,7 +89,7 @@ export default function ArticleDetail() {
 
           {article.tags.length > 0 && (
             <div className="mt-10 flex flex-wrap gap-2">
-              {article.tags.map((t) => (
+              {article.tags.map((t: any) => (
                 <span key={t.id} className="px-3 py-1.5 rounded-full bg-mist border border-mist-line text-xs font-medium text-ink">
                   #{t.name}
                 </span>
@@ -123,7 +123,7 @@ export default function ArticleDetail() {
           <div className="container-editorial py-14 max-w-4xl mx-auto">
             <h2 className="font-display text-xl font-semibold text-ink mb-2">Related articles</h2>
             <div>
-              {related.map((a) => (
+              {related.map((a: any) => (
                 <ArticleCard key={a.id} article={a} variant="horizontal" />
               ))}
             </div>

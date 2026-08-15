@@ -14,7 +14,7 @@ export default function Articles() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   useEffect(() => {
-    getPublishedArticles().then((a) => {
+    getPublishedArticles().then((a: Article[]) => {
       setArticles(a)
       setLoading(false)
     })
@@ -38,7 +38,7 @@ export default function Articles() {
           >
             All
           </button>
-          {categories.map((c) => (
+          {categories.map((c: any) => (
             <button
               key={c.id}
               onClick={() => setActiveCategory(c.slug)}
@@ -56,7 +56,7 @@ export default function Articles() {
             <Loading label="Loading articles" />
           ) : filtered.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
-              {filtered.map((a) => (
+              {filtered.map((a: any) => (
                 <ArticleCard key={a.id} article={a} />
               ))}
             </div>

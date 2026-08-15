@@ -14,9 +14,9 @@ export async function getAdminOverviewStats(): Promise<AdminOverviewStats> {
 
   return {
     totalArticles: articles.length,
-    publishedArticles: articles.filter((a) => a.status === 'published').length,
-    draftArticles: articles.filter((a) => a.status === 'draft').length,
+    publishedArticles: articles.filter((a: any) => a.status === 'published').length,
+    draftArticles: articles.filter((a: any) => a.status === 'draft').length,
     totalProjects: projects.length,
-    totalViews: isSupabaseConfigured ? articles.reduce((sum, a) => sum + a.views, 0) : 0,
+    totalViews: isSupabaseConfigured ? articles.reduce((sum: number, a: any) => sum + (a.views ?? 0), 0) : 0,
   }
 }

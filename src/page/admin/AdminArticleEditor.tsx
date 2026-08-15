@@ -34,8 +34,8 @@ export default function AdminArticleEditor() {
 
   useEffect(() => {
     if (!id) return
-    getAllArticlesForAdmin().then((articles) => {
-      const article = articles.find((a) => a.id === id)
+    getAllArticlesForAdmin().then((articles: any[]) => {
+      const article = articles.find((a: any) => a.id === id)
       if (!article) return
       setForm({
         title: article.title,
@@ -44,7 +44,7 @@ export default function AdminArticleEditor() {
         content: article.content,
         cover_image: article.cover_image ?? '',
         category_id: article.category.id,
-        tag_ids: article.tags.map((t) => t.id),
+        tag_ids: article.tags.map((t: any) => t.id),
         seo_title: article.seo_title ?? '',
         seo_description: article.seo_description ?? '',
         featured: article.featured,
@@ -74,8 +74,8 @@ export default function AdminArticleEditor() {
     setSaving(true)
     setError(null)
 
-    const category = categories.find((c) => c.id === form.category_id)!
-    const selectedTags = tags.filter((t) => form.tag_ids.includes(t.id))
+    const category = categories.find((c: any) => c.id === form.category_id)!
+    const selectedTags = tags.filter((t: any) => form.tag_ids.includes(t.id))
 
     const result = await saveArticle({
       id,
@@ -204,14 +204,14 @@ export default function AdminArticleEditor() {
                 onChange={(e) => updateField('category_id', e.target.value)}
                 className="w-full rounded-lg border border-line px-3 py-2.5 text-sm outline-none focus-visible:border-accent"
               >
-                {categories.map((c) => (
+                {categories.map((c: any) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
               </select>
 
               <label className="block text-sm font-medium text-ink mb-1.5 mt-4">Tags</label>
               <div className="flex flex-wrap gap-2">
-                {tags.map((t) => (
+                {tags.map((t: any) => (
                   <button
                     key={t.id}
                     type="button"
